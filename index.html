@@ -1,0 +1,1387 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puja Parikrama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        .header {
+            background-image: url('https://www.issgovernance.com/file/2013/11/Website-Frontpage-Header-02.jpg');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 2.5em;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            flex: 1 1 100px; /* Allow tabs to wrap and grow */
+            text-align: center;
+        }
+        .tab.active {
+            background-color: #4285f4;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            width: 16px; /* Adjusted for better visibility */
+            height: 16px; /* Adjusted for better visibility */
+            cursor: pointer;
+        }
+        iframe {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+            display: none;
+        }
+        .name_tr {
+            display: block;
+            padding: 1rem;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .header {
+                font-size: 2em; /* Decrease font size for smaller screens */
+            }
+            .tab {
+                flex: 1 1 100%; /* Stack tabs vertically */
+            }
+            img {
+                width: 20px; /* Smaller icons for mobile */
+                height: 20px;
+            }
+        }
+    </style>
+    <script>
+        function isMobile() {
+            return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        }
+
+        function openVideo(linkId, iframeId) {
+            if (isMobile()) {
+                // Open in app if available
+                window.open(linkId, '_system');
+            } else {
+                var iframe = document.getElementById(iframeId);
+                if (iframe.style.display === "none") {
+                    iframe.src = linkId;
+                    iframe.style.display = "block";
+                } else {
+                    iframe.style.display = "none";
+                    iframe.src = "";  // stop the video when hidden
+                }
+            }
+        }
+
+        function filterByLocation(location) {
+            var rows = document.getElementsByClassName("video_row");
+            var tabs = document.getElementsByClassName("tab");
+
+            for (var i = 0; i < rows.length; i++) {
+                var rowLocation = rows[i].getAttribute("data-location");
+                if (location === "All" || rowLocation === location) {
+                    rows[i].style.display = "block";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+            
+            for (var j = 0; j < tabs.length; j++) {
+                tabs[j].classList.remove("active");
+            }
+            document.getElementById("tab_" + location).classList.add("active");
+        }
+    </script>
+</head>
+<body>
+
+<div class="header">
+    পুজো পরিক্রমা ২০২৪
+</div>
+
+<!-- Location Filter Tabs -->
+<div class="tabs">
+    <div class="tab active" id="tab_All" onclick="filterByLocation('All')">All</div>
+<div class="tab" id="tab_North" onclick="filterByLocation('North')">North</div>
+<div class="tab" id="tab_South" onclick="filterByLocation('South')">South</div>
+<div class="tab" id="tab_Behala" onclick="filterByLocation('Behala')">Behala</div>
+<div class="tab" id="tab_Howrah" onclick="filterByLocation('Howrah')">Howrah</div>
+<div class="tab" id="tab_Belur Math" onclick="filterByLocation('Belur Math')">Belur Math</div>
+<div class="tab" id="tab_Live" onclick="filterByLocation('Live')">Live</div>
+
+</div>
+<table>
+
+    <tr class="name_tr video_row" data-location="North">
+        <td>Ahiritola Jubak Brinda (Theme: আকারের মহাযাত্রা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=DV2w_AkmquE', 'video_Ahiritola Jubak Brinda_18')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=ZO-lApfh5iI', 'video_Ahiritola Jubak Brinda_19')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Ahiritola Jubak Brinda_18" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Ahiritola Jubak Brinda_19" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Ak Association  Saltlake Durgotsav (Theme: বারিবিন্দু) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CTaPvR2h/', 'video_Ak Association  Saltlake Durgotsav_50')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Ak Association  Saltlake Durgotsav_50" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Ahiritola Sarbojonin Durgotsav (Theme: খেয়াল সেতুর বৈতরণী) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CKiMr2PT/', 'video_Ahiritola Sarbojonin Durgotsav_16')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=FKXI62xFl4Q', 'video_Ahiritola Sarbojonin Durgotsav_17')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Ahiritola Sarbojonin Durgotsav_16" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Ahiritola Sarbojonin Durgotsav_17" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Beliaghata 33no  Palli  (Theme: কোহি-নূর) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=yFGVZFMiTOM', 'video_Beliaghata 33no  Palli _47')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=QpIZRr7Il8g', 'video_Beliaghata 33no  Palli _48')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Beliaghata 33no  Palli _47" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Beliaghata 33no  Palli _48" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Chaltabagan Sarbojanin Durgapuja Committee (Theme: অন্তরলোক ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=Z-Dct1AdnG8', 'video_Chaltabagan Sarbojanin Durgapuja Committee_42')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Chaltabagan Sarbojanin Durgapuja Committee_42" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Chorebagan Sarbojanin Durgotsab (Theme: দুগ্গা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=QFUz5x37u5s', 'video_Chorebagan Sarbojanin Durgotsab_49')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Chorebagan Sarbojanin Durgotsab_49" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Dumdum Park Sarbojanin Durga  (Theme: মানব জামিন) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=S7McHRvlIYk', 'video_Dumdum Park Sarbojanin Durga _34')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Dumdum Park Sarbojanin Durga _34" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Dakshindari Youth (Theme:  সিংহ বাহিনী) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CNGI_I2-/', 'video_Dakshindari Youth_43')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Dakshindari Youth_43" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Dakshinpara Durgotsab Committee (Theme: তরঙ্গ ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CUbA2ulH/', 'video_Dakshinpara Durgotsab Committee_51')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=Vx3UkQxHZHE', 'video_Dakshinpara Durgotsab Committee_52')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Dakshinpara Durgotsab Committee_51" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Dakshinpara Durgotsab Committee_52" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Dum Dum Park Bharat Chakra Club (Theme: উড়ান ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CMPphGqT/', 'video_Dum Dum Park Bharat Chakra Club_38')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Dum Dum Park Bharat Chakra Club_38" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Dum Dum Park Tarun Sangha (Theme: মুক্তধারা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=94g4ncrtc8w', 'video_Dum Dum Park Tarun Sangha_33')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Dum Dum Park Tarun Sangha_33" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Dum Dum Tarun Dal  (Theme: নীল সাদা  ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=rfdCin18XwM', 'video_Dum Dum Tarun Dal _36')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=hC7Pv0za6hE', 'video_Dum Dum Tarun Dal _37')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Dum Dum Tarun Dal _36" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Dum Dum Tarun Dal _37" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Goabagan Sarodatsav Sammilani  (Theme: কদর) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CV70WoqZ/', 'video_Goabagan Sarodatsav Sammilani _54')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Goabagan Sarodatsav Sammilani _54" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Hatibagan Sarbojanin Durgotsav (Theme: প্রকরণ - PROCESS ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=i_oOJAgehZw', 'video_Hatibagan Sarbojanin Durgotsav_23')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Hatibagan Sarbojanin Durgotsav_23" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Hatibagan Nabinpally  (Theme: থিয়েটার পাড়া) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=p8Xv4cUoR6s', 'video_Hatibagan Nabinpally _25')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Hatibagan Nabinpally _25" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Jagat Mukherjee Park (Theme: UNDERWATER METRO) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CKZ9gudX/', 'video_Jagat Mukherjee Park_20')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=8aJ0iAl_umQ', 'video_Jagat Mukherjee Park_21')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Jagat Mukherjee Park_20" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Jagat Mukherjee Park_21" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Jorasanko Sadharan Durgotsav Samity (Theme: ঐশ্বরিক শিল্পী) <br> 
+            <br><a onclick="openVideo('https://www.facebook.com/100003747356646/videos/1347589399555709/', 'video_Jorasanko Sadharan Durgotsav Samity_45')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Jorasanko Sadharan Durgotsav Samity_45" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Kankurgachi Yubak Brinda (Theme: রূপকার ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=D1fjkBd6mYo', 'video_Kankurgachi Yubak Brinda_41')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Kankurgachi Yubak Brinda_41" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Kashi Bose Lane Durga Puja Samity (Theme: রত্নগর্ভা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=YsDRMSir1UQ', 'video_Kashi Bose Lane Durga Puja Samity_22')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Kashi Bose Lane Durga Puja Samity_22" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Kumartuli Park Sarbojanin (Theme: মহিষাসুরমর্দিনী) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CIRsY2jw/', 'video_Kumartuli Park Sarbojanin_15')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Kumartuli Park Sarbojanin_15" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Kumartuli Sarbojanin Durgotsab (Theme: ক্ষুধা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=zHH-AOVIXTw', 'video_Kumartuli Sarbojanin Durgotsab_14')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Kumartuli Sarbojanin Durgotsab_14" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Lalabagan Nabankur  (Theme: লালবাগানে নবাঙ্কুর ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=DRpJuUXMzp4', 'video_Lalabagan Nabankur _46')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Lalabagan Nabankur _46" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Mitali Kankurgachi (Theme: উপাসনা ) <br> 
+            <br><a onclick="openVideo('https://www.facebook.com/100003747356646/videos/502678212674146/', 'video_Mitali Kankurgachi_44')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Mitali Kankurgachi_44" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Nalin Sarkar Street (Theme: শহরনামা ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=X2iT_7fBOEk', 'video_Nalin Sarkar Street_26')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Nalin Sarkar Street_26" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>North Tridhara Sarbojanin (Theme: সলতে ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=-aa_LD78Nn0', 'video_North Tridhara Sarbojanin_53')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_North Tridhara Sarbojanin_53" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Prafulla Kanan Balak Brinda East (Theme: পিত্রালয় ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=hb_TY8Llubo', 'video_Prafulla Kanan Balak Brinda East_31')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Prafulla Kanan Balak Brinda East_31" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Prafulla Kanan Paschim Adhibasi Brinda (Theme: ৫১ একান্ন ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=Q0knAlfC9cM', 'video_Prafulla Kanan Paschim Adhibasi Brinda_32')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Prafulla Kanan Paschim Adhibasi Brinda_32" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Sovabazar Burtolla Sarbojanin Durgotsav Samity (Theme: ধন-ধান্য) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=Q1P_TlyQL1w', 'video_Sovabazar Burtolla Sarbojanin Durgotsav Samity_35')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Sovabazar Burtolla Sarbojanin Durgotsav Samity_35" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Sikdar Bagan Sadharan Durgotsov (Theme: মানবতার উৎসব) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=UXMxCuEjfak', 'video_Sikdar Bagan Sadharan Durgotsov_24')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Sikdar Bagan Sadharan Durgotsov_24" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Tala Barowar (Theme: হীরা-মানিক জ্বলে/হীরক রাজার দেশে/ Satyajit Ray) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=N4D35SqEWjo', 'video_Tala Barowar_39')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Tala Barowar_39" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Tala Prattoy  (Theme: বিহীন .. the void) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=VkNBPmgUCxc', 'video_Tala Prattoy _40')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Tala Prattoy _40" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Ultadanga Bidhan Sangha (Theme: বাণিজ্যে বসতে লক্ষী ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=R47YwZXpL5M', 'video_Ultadanga Bidhan Sangha_29')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Ultadanga Bidhan Sangha_29" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Ultadanga Karbagan Sarbajanin Durgotsab  (Theme: ভবপ্রীতা ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=AGcBhao2D14', 'video_Ultadanga Karbagan Sarbajanin Durgotsab _28')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Ultadanga Karbagan Sarbajanin Durgotsab _28" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="North">
+        <td>Telengabagan  (Theme: পৃথিবী গদ্যময় ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=plC6ubN4FN0', 'video_Telengabagan _30')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="North">
+    <td>
+            <iframe id="video_Telengabagan _30" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>95 Pally Jodhpur Park (Theme: ভবতারিণী ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=RjAs04tgkKQ', 'video_95 Pally Jodhpur Park_64')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=5yBaku4PSpE', 'video_95 Pally Jodhpur Park_65')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_95 Pally Jodhpur Park_64" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_95 Pally Jodhpur Park_65" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Arjunpur Amra Sabai Club (Theme: অন্যদেশ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=nxeyxbPj7hg', 'video_Arjunpur Amra Sabai Club_91')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Arjunpur Amra Sabai Club_91" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Abasar Sarbojanin Durgotsab Samity (Theme: মহল্লা) <br> 
+            <br><a onclick="openVideo('https://www.facebook.com/prasanta.pal.9256/videos/370149039397566/', 'video_Abasar Sarbojanin Durgotsab Samity_86')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Abasar Sarbojanin Durgotsab Samity_86" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Ajeya Sanghati  (Theme: ঈক্ষণ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=1W1vIBnVzcA', 'video_Ajeya Sanghati _94')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Ajeya Sanghati _94" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Babubagan Sarbojonin (Theme: কবিতীর্থ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=2P88Y6bKxwg', 'video_Babubagan Sarbojonin_62')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> others
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Babubagan Sarbojonin_62" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Badamtala Ashar Sangha (Theme: উৎসবের চালচিত্রে) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=-Wxi7dD90PA', 'video_Badamtala Ashar Sangha_75')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Badamtala Ashar Sangha_75" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Baghajatin Bc Block (Theme:  ভালোবাসার আলাদিন) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D3fLrcuz/', 'video_Baghajatin Bc Block_84')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Baghajatin Bc Block_84" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Baghajatin E Block Sarbojonin (Theme: স্মৃতিকথা) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D5k-veUY/', 'video_Baghajatin E Block Sarbojonin_87')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Baghajatin E Block Sarbojonin_87" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Bosepukur Shitala Mandir (Theme: স ঞ্চ য়) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5CZDh1wYP/', 'video_Bosepukur Shitala Mandir_56')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Bosepukur Shitala Mandir_56" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Bosepukur Talbagan  (Theme: রক্তকরবী) <br> 
+            <br><a onclick="openVideo('https://www.facebook.com/100006865150680/videos/775817797948060/', 'video_Bosepukur Talbagan _55')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Bosepukur Talbagan _55" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Chakraberia Sarbojanin Durgotsab (Theme: নির্বাক) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=UlQyNG2jeYw', 'video_Chakraberia Sarbojanin Durgotsab_81')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Chakraberia Sarbojanin Durgotsab_81" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Chetla Agrani Club (Theme: কাশী বারাণসী ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=xgM0d-oy1aA', 'video_Chetla Agrani Club_83')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Chetla Agrani Club_83" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Deshapriya Park (Theme: এবার ভুবনেশ্বরী ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D0X7v6rD/', 'video_Deshapriya Park_68')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Deshapriya Park_68" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Gariahat Hindustan Club (Theme: বন্ধনহীন গ্রন্থি) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=TrtZyYx3isw', 'video_Gariahat Hindustan Club_60')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Gariahat Hindustan Club_60" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Haridevpur New Sporting Club (Theme: আদায় ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=mo0Bnp90xR4', 'video_Haridevpur New Sporting Club_89')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Haridevpur New Sporting Club_89" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Hazra Park (Theme: শুদ্ধি) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D2xf6nMJ/', 'video_Hazra Park_79')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Hazra Park_79" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Hindusthan Park Sarbojanin Durgatsav (Theme: কল্প ঋতুর গল্প গাঁথা) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5C-oyscTY/', 'video_Hindusthan Park Sarbojanin Durgatsav_61')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Hindusthan Park Sarbojanin Durgatsav_61" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Jadavpur Athletic Club Durga Puja (Theme: পুতুল গড়ার শহরে) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=6iwfVy9BsVc', 'video_Jadavpur Athletic Club Durga Puja_66')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Jadavpur Athletic Club Durga Puja_66" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Jodhpur Park (Theme: নি:স্বর নিস্তারিনী) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=LA_hRbqf1Ko', 'video_Jodhpur Park_67')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Jodhpur Park_67" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Khidderpore Jubak Sangha (Theme: অস্তিত্ব রক্ষা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=mV8ncF4uJ-k', 'video_Khidderpore Jubak Sangha_95')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Khidderpore Jubak Sangha_95" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Kalighat Milan Sangha (Theme: মানতপুরী) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=1NXig1n7aj0', 'video_Kalighat Milan Sangha_69')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> others
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Kalighat Milan Sangha_69" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Kendua Shanti Sangha Sarbojanin Durgotsab (Theme: অনুনাদ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D6mdsAy3/', 'video_Kendua Shanti Sangha Sarbojanin Durgotsab_88')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Kendua Shanti Sangha Sarbojanin Durgotsab_88" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Kiddirpur 25 Pally Club (Theme: পরিচারণ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=zA3gWTTDUKg', 'video_Kiddirpur 25 Pally Club_71')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Kiddirpur 25 Pally Club_71" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Mudiali Club (Theme: ত্রি-মাত্রিক ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D1KJObg5/', 'video_Mudiali Club_77')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Mudiali Club_77" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Naktala Udayan Sangha (Theme: একান্নবর্তী) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=-LwWjRCfi0A', 'video_Naktala Udayan Sangha_72')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Naktala Udayan Sangha_72" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Pratapaditya Road Tricone Park (Theme: স্বপথ ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=e7jZaLjJOKk', 'video_Pratapaditya Road Tricone Park_73')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Pratapaditya Road Tricone Park_73" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Purbachal Shakti Sangha (Theme: কলকাতার মূর্তিকথা) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=BYRPHhSLhQ8', 'video_Purbachal Shakti Sangha_74')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Purbachal Shakti Sangha_74" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Rajdanga Naba Uday Sangha (Theme: ভারসাম্য ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=8d7oaoAED_I', 'video_Rajdanga Naba Uday Sangha_57')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=hy3735jI57o', 'video_Rajdanga Naba Uday Sangha_58')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Rajdanga Naba Uday Sangha_57" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            
+            <iframe id="video_Rajdanga Naba Uday Sangha_58" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Shibmandir Sarbojanin Durgotsab Samiti (Theme: ব্রাত্য ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=cXapf40--V0', 'video_Shibmandir Sarbojanin Durgotsab Samiti_80')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Shibmandir Sarbojanin Durgotsab Samiti_80" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Samaj Sebi Sangha Durgapuja (Theme: কর্ষণ ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=OegEkiaIbqw', 'video_Samaj Sebi Sangha Durgapuja_76')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Samaj Sebi Sangha Durgapuja_76" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Santoshpur Avenue South (Theme: আগমন গমন ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=90n69a_3BP4', 'video_Santoshpur Avenue South_70')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Santoshpur Avenue South_70" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Santoshpur Lake Pally  (Theme: চালচিত্র ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5DfynNpe5/', 'video_Santoshpur Lake Pally _96')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Santoshpur Lake Pally _96" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Santoshpur Trikonpark Sarbojanin Durgotsab (Theme: উদযাপন) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D94j8tXE/', 'video_Santoshpur Trikonpark Sarbojanin Durgotsab_90')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Santoshpur Trikonpark Sarbojanin Durgotsab_90" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Selimpur Pally Sarbojanin (Theme: গোধূলির স্বপ্ন ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D0b67WFl/', 'video_Selimpur Pally Sarbojanin_63')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Selimpur Pally Sarbojanin_63" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Singhi Park Sarbojanin (Theme: সাতমহলার অন্তঃপুরে ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5C_oU1-AO/', 'video_Singhi Park Sarbojanin_59')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Singhi Park Sarbojanin_59" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Suruchi Sangha (Theme: পুরানো সেই দিনের কথা ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=rSdckWhnIlY', 'video_Suruchi Sangha_82')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Suruchi Sangha_82" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Thakurpukur State Bank Park Sarbojanin (Theme: আমাদের দুগ্গা মা ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=DvV3rlJnGGI', 'video_Thakurpukur State Bank Park Sarbojanin_93')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Thakurpukur State Bank Park Sarbojanin_93" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Vivekananda Park Athletic Club  (Theme: ব্যারিকেড) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=kr8u9m2BgNQ', 'video_Vivekananda Park Athletic Club _92')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Vivekananda Park Athletic Club _92" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td>Alipore Sarbojanin (Theme: সং-কল্প) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5D4jzHeFJ/', 'video_Alipore Sarbojanin_85')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_Alipore Sarbojanin_85" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="South">
+        <td> Bakul Bagan Sarbojanin Durgotsab (Theme: মাসান) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=ukYejJcigWo', 'video_ Bakul Bagan Sarbojanin Durgotsab_78')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="South">
+    <td>
+            <iframe id="video_ Bakul Bagan Sarbojanin Durgotsab_78" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Behala">
+        <td>Barisha Club Durga (Theme: বসতি ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=WgtDmPmdFzA', 'video_Barisha Club Durga_100')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Behala">
+    <td>
+            <iframe id="video_Barisha Club Durga_100" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Behala">
+        <td>Barisha Sarbojanin (Theme: রুদ্রাণী ) <br> 
+            <br><a onclick="openVideo('https://fb.watch/v5DgGkzPO9/', 'video_Barisha Sarbojanin_97')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Behala">
+    <td>
+            <iframe id="video_Barisha Sarbojanin_97" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Behala">
+        <td>Behala Club Durga Puja (Theme: আরণ‍্যক ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=lGm_7UcKX6E', 'video_Behala Club Durga Puja_99')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Behala">
+    <td>
+            <iframe id="video_Behala Club Durga Puja_99" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Behala">
+        <td>Behala Devdaru Photok (Theme: হৃদয় চিরলে দূর্গা পাবে ) <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=4oAOODTiwdM', 'video_Behala Devdaru Photok_98')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Sangbad Pratidin
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Behala">
+    <td>
+            <iframe id="video_Behala Devdaru Photok_98" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Howrah">
+        <td>Madhusudan Das Lane And Bye Lane Sarbojaneen Durgotsab (Theme: অন্ধকারের উৎস হতে) <br> 
+            <br><a onclick="openVideo('https://www.facebook.com/Adhibasibrinda1989/videos/1279941803354762/', 'video_Madhusudan Das Lane And Bye Lane Sarbojaneen Durgotsab_101')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Theme Video
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Howrah">
+    <td>
+            <iframe id="video_Madhusudan Das Lane And Bye Lane Sarbojaneen Durgotsab_101" frameborder="0" allowfullscreen></iframe>
+           &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Shasthi   Bodhan   <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=xaN_ei11vkI', 'video_Shasthi   Bodhan _0')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Shasthi   Bodhan _0" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Shasthi   Kalparambha  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=U9JC9BzbmrE', 'video_Shasthi   Kalparambha_1')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Shasthi   Kalparambha_1" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Shasthi  Amantran   Adhivas  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=VYqooKInj44', 'video_Shasthi  Amantran   Adhivas_2')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Shasthi  Amantran   Adhivas_2" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Saptami Puja  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=DkPmO5vvUZg', 'video_Saptami Puja_3')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Saptami Puja_3" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Saptami   Arati  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=81E-JzSR-CE', 'video_Saptami   Arati_4')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Saptami   Arati_4" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Mahashtami Puja  Kumari Puja  Sandhi Puja  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=rF0DMTRFdG8', 'video_Mahashtami Puja  Kumari Puja  Sandhi Puja_5')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Mahashtami Puja  Kumari Puja  Sandhi Puja_5" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Ashtami   Arati  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=jxwi8QFOXVA', 'video_Ashtami   Arati_6')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Ashtami   Arati_6" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Mahanavami Puja  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=43EE9AZRu0Q', 'video_Mahanavami Puja_7')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Mahanavami Puja_7" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Navami   Arati  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=l2ecrLhVDV4', 'video_Navami   Arati_8')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Navami   Arati_8" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Dashami Puja  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=Hruq7OTL2gE', 'video_Dashami Puja_9')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Dashami Puja_9" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Belur Math">
+        <td>Visarjan  <br> 
+            <br><a onclick="openVideo('https://www.youtube.com/watch?v=awyw2TEzFMc', 'video_Visarjan_10')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width: 24px !important;"> Live stream
+            </a> &nbsp;&nbsp;&nbsp;</td>
+    </tr>
+    <tr class="video_row" data-location="Belur Math">
+    <td>
+            <iframe id="video_Visarjan_10" frameborder="0" allowfullscreen></iframe>
+            &nbsp;&nbsp;&nbsp;
+            </td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Live">
+        <td>Sree Bhumi Sporting Club  <br> </td>
+    </tr>
+    <tr class="video_row" data-location="Live">
+    <td></td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Live">
+        <td>Suruchi Sangha Official  <br> </td>
+    </tr>
+    <tr class="video_row" data-location="Live">
+    <td></td>
+    </tr>
+    
+    <tr class="name_tr video_row" data-location="Live">
+        <td>Santosh Mitra Square Durga Puja  <br> </td>
+    </tr>
+    <tr class="video_row" data-location="Live">
+    <td></td>
+    </tr>
+    
+</table>
+</body>
+</html>
