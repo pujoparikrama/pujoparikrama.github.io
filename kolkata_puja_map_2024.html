@@ -48,7 +48,7 @@
 }
 	
     #sidebar {
-      width: 340px; background: #fff;
+      width: 440px; background: #fff;
       border-right: 1px solid #ddd;
       overflow-y: auto; display: flex;
       flex-direction: column; box-shadow: 2px 0 6px rgba(0,0,0,0.08);
@@ -942,12 +942,14 @@
           </div>`
         );
       markers.push({ marker: marker, data: loc });
-
+		const isMobile = window.innerWidth < 768;
+		const defaultZoom = isMobile ? 18 : 15;
       var placeDiv = document.createElement("div");
       placeDiv.className = "place";
       placeDiv.innerHTML = `<strong>${loc.name}</strong>${loc.theme ? "<small>ভাবনা : "+loc.theme+"</small>" : ""}`;
       placeDiv.onclick = function() {
-        map.setView([loc.lat, loc.lon], 15);
+        map.setView([loc.lat, loc.lon], defaultZoom);
+		//map.panBy([-150, -150]);
         marker.openPopup();
       };
       placesList.appendChild(placeDiv);
@@ -963,7 +965,8 @@
           placeDiv.className = "place";
           placeDiv.innerHTML = `<strong>${item.data.name}</strong>${item.data.theme ? "<small>ভাবনা : "+item.data.theme+"</small>" : ""}`;
           placeDiv.onclick = function() {
-            map.setView([item.data.lat, item.data.lon], 15);
+            map.setView([item.data.lat, item.data.lon], defaultZoom);
+			//map.panBy([-150, -150]);
             item.marker.openPopup();
           };
           placesList.appendChild(placeDiv);
