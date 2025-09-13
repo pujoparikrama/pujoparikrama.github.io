@@ -10,18 +10,49 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
-    body, html {
-      margin: 0; padding: 0; height: 100%;
-      font-family: 'Poppins', sans-serif;
-      background: #f0f4f8;
-    }
+    body, html { margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif; }
     #container { display: flex; height: 100vh; }
+	/* Hide toggle button on desktop */
+#toggleBtn {
+  display: none;
+}
+
+/* Show on mobile (max-width 768px) */
+@media (max-width: 768px) {
+  #toggleBtn {
+    display: block;
+  }
+}
+.sidebar-header {
+  position: sticky;
+  top: 0;
+  background: #fff;  /* keep same as sidebar */
+  padding: 10px;
+  z-index: 3;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sidebar-header input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+	
     #sidebar {
       width: 340px; background: #fff;
       border-right: 1px solid #ddd;
       overflow-y: auto; display: flex;
       flex-direction: column; box-shadow: 2px 0 6px rgba(0,0,0,0.08);
-      z-index: 1000;
+      z-index: 1000; transition: transform 0.3s ease;
     }
     #sidebar h2 {
       margin: 0; font-size: 20px; text-align: center;
@@ -47,27 +78,44 @@
     }
     .place strong { display: block; font-size: 15px; color: #c9184a; }
     #map { flex: 1; }
-    .leaflet-popup-content-wrapper {
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
-    }
-    .leaflet-popup-content { font-size: 13px; }
+    .leaflet-popup-content-wrapper { border-radius: 10px; }
     .leaflet-popup-content strong { font-size: 14px; color: #c9184a; }
     .leaflet-popup-content a {
       display: inline-block; margin-top: 6px;
       padding: 6px 10px; background: #c9184a;
       color: white !important; text-decoration: none;
       border-radius: 6px; font-size: 12px;
-      transition: background 0.2s;
     }
     .leaflet-popup-content a:hover { background: #ff4d6d; }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      #container { flex-direction: column; }
+      #sidebar {
+        position: fixed; width:100vw; bottom: 0; left: 0; right: 0;
+        height: 50vh; transform: translateY(100%);
+        border-right: none; border-top: 1px solid #ddd;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+      }
+      #sidebar.open { transform: translateY(0); }
+      #map { flex: none; height: 100%; }
+      #toggleBtn {
+        position: absolute; top: 10px; left: 10px; z-index: 2000;
+        background: #c9184a; color: white; border: none; border-radius: 6px;
+        padding: 8px 12px; font-size: 14px; cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      }
+    }
   </style>
 </head>
 <body>
   <div id="container">
+    <button id="toggleBtn">☰ List</button>
     <div id="sidebar">
+	<div class="sidebar-header">
       <h2>🌸 Kolkata Durga Puja 2024</h2>
       <input type="text" id="searchBox" placeholder="Search Puja name...">
+	 </div>
       <div id="placesList"></div>
     </div>
     <div id="map"></div>
@@ -76,23 +124,24 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    // Initialize map
     var map = L.map('map').setView([22.5726, 88.3639], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
 
-    // Custom icon
-    var customIcon = L.icon({
-      iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
-      iconSize: [28, 28],
-      iconAnchor: [14, 28],
-      popupAnchor: [0, -25]
-    });
+    // Custom colored icon
+    function coloredIcon(color) {
+      return L.divIcon({
+        html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="${color}" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`,
+        className: "",
+        iconSize: [28, 28],
+        iconAnchor: [14, 28],
+        popupAnchor: [0, -25]
+      });
+    }
 
-    // CSV data converted into JS (sample few, replace with all 96)
     var locations = [
-       {
+      {
         name:"অর্জুনপুর আমরা সবাই ক্লাব",
         engname: "Arjunpur Amra Sabai Club",
         lat: 22.624235, lon:  88.424511,
@@ -880,8 +929,9 @@
     var markers = [];
     var placesList = document.getElementById("placesList");
 
-    locations.forEach(function(loc) {
-      var marker = L.marker([loc.lat, loc.lon], {icon: customIcon}).addTo(map)
+    locations.forEach(function(loc, i) {
+      var color = "#c9184a"//i % 2 === 0 ? "#c9184a" : "#0077b6"; // alternate colors
+      var marker = L.marker([loc.lat, loc.lon], {icon: coloredIcon(color)}).addTo(map)
         .bindPopup(
           `<div>
             <strong>${loc.name}</strong><br/>
@@ -893,7 +943,6 @@
         );
       markers.push({ marker: marker, data: loc });
 
-      // Sidebar item
       var placeDiv = document.createElement("div");
       placeDiv.className = "place";
       placeDiv.innerHTML = `<strong>${loc.name}</strong>${loc.theme ? "<small>ভাবনা : "+loc.theme+"</small>" : ""}`;
@@ -909,7 +958,7 @@
       var query = e.target.value.toLowerCase();
       placesList.innerHTML = "";
       markers.forEach(function(item) {
-        if(item.data.name.toLowerCase().includes(query)||item.data.engname.toLowerCase().includes(query)) {
+        if(item.data.name.toLowerCase().includes(query) || item.data.engname.toLowerCase().includes(query)) {
           var placeDiv = document.createElement("div");
           placeDiv.className = "place";
           placeDiv.innerHTML = `<strong>${item.data.name}</strong>${item.data.theme ? "<small>ভাবনা : "+item.data.theme+"</small>" : ""}`;
@@ -920,6 +969,12 @@
           placesList.appendChild(placeDiv);
         }
       });
+    });
+
+    // Toggle sidebar for mobile
+    var sidebar = document.getElementById("sidebar");
+    document.getElementById("toggleBtn").addEventListener("click", function() {
+      sidebar.classList.toggle("open");
     });
   </script>
 </body>
