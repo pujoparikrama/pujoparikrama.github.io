@@ -87,6 +87,9 @@
       border-radius: 6px; font-size: 12px;
     }
     .leaflet-popup-content a:hover { background: #ff4d6d; }
+.leaflet-control-attribution {
+  top: 5px !important;   /* distance from top */
+}
 
     /* Mobile adjustments */
     @media (max-width: 768px) {
@@ -101,11 +104,12 @@
       #sidebar.open { transform: translateY(0); }
       #map { flex: none; height: 100%; }
       #toggleBtn {
-        position: absolute; top: 10px; right: 10px; z-index: 2000;
+        position: absolute; top: 30px; right: 10px; z-index: 2000;
         background: #c9184a; color: white; border: none; border-radius: 6px;
         padding: 8px 12px; font-size: 14px; cursor: pointer;
         box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       }
+
     }
   </style>
 </head>
@@ -125,10 +129,14 @@
   <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    var map = L.map('map').setView([22.5726, 88.3639], 12);
+    var map = L.map('map' ,{
+			attributionControl: false
+		}).setView([22.5726, 88.3639], 12);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
     }).addTo(map);
+	L.control.attribution({position: 'topright'}).addTo(map);
+	
 
     // Custom colored icon
     function coloredIcon(color) {
