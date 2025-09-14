@@ -100,7 +100,7 @@
       #sidebar.open { transform: translateY(0); }
       #map { flex: none; height: 100%; }
       #toggleBtn {
-        position: absolute; top: 10px; left: 10px; z-index: 2000;
+        position: absolute; top: 10px; right: 10px; z-index: 2000;
         background: #c9184a; color: white; border: none; border-radius: 6px;
         padding: 8px 12px; font-size: 14px; cursor: pointer;
         box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -110,7 +110,7 @@
 </head>
 <body>
   <div id="container">
-    <button id="toggleBtn">☰ List</button>
+    <button id="toggleBtn">☰ Pandals </button>
     <div id="sidebar">
 	<div class="sidebar-header">
       <h2>🌸 Kolkata Durga Puja 2024</h2>
@@ -936,14 +936,14 @@
           `<div>
             <strong>${loc.name}</strong><br/>
             ${loc.theme ? "<em>Theme: " + loc.theme + "</em><br/>" : ""}
-            <a href="${loc.gmap}" target="_blank">📍 Google Maps</a>
+            <a href="${loc.gmap}" target="_blank">📍 Directions </a>
             ${loc.video1 ? `<a href="${loc.video1}" target="_blank">▶ Video 1</a>` : ""}
             ${loc.video2 ? `<a href="${loc.video2}" target="_blank">▶ Video 2</a>` : ""}
           </div>`
         );
       markers.push({ marker: marker, data: loc });
 		const isMobile = window.innerWidth < 768;
-		const defaultZoom = isMobile ? 18 : 15;
+		const defaultZoom = isMobile ? 16 : 15;
       var placeDiv = document.createElement("div");
       placeDiv.className = "place";
       placeDiv.innerHTML = `<strong>${loc.name}</strong>${loc.theme ? "<small>ভাবনা : "+loc.theme+"</small>" : ""}`;
@@ -959,6 +959,8 @@
     document.getElementById("searchBox").addEventListener("input", function(e) {
       var query = e.target.value.toLowerCase();
       placesList.innerHTML = "";
+	  const isMobile = window.innerWidth < 768;
+	  const defaultZoom = isMobile ? 16 : 15;
       markers.forEach(function(item) {
         if(item.data.name.toLowerCase().includes(query) || item.data.engname.toLowerCase().includes(query)) {
           var placeDiv = document.createElement("div");
@@ -976,9 +978,21 @@
 
     // Toggle sidebar for mobile
     var sidebar = document.getElementById("sidebar");
+	var mapDiv = document.getElementById("map");
     document.getElementById("toggleBtn").addEventListener("click", function() {
       sidebar.classList.toggle("open");
+	  
+	  if (sidebar.classList.contains("open")) {
+		mapDiv.style.height = "50%";   // Shrink when menu open
+	  } else {
+		mapDiv.style.height = "100%";  // Full when menu closed
+	  }
+
+	  setTimeout(() => {
+		map.invalidateSize(); // force Leaflet to redraw map
+	  }, 300);
     });
+	
   </script>
 </body>
 </html>
