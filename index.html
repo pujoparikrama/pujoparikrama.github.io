@@ -1264,7 +1264,7 @@
     var placesList = document.getElementById("placesList");
 
     locations.forEach(function(loc, i) {
-      var color = "#c9184a"//i % 2 === 0 ? "#c9184a" : "#0077b6"; // alternate colors
+      var color = var color = loc.video1 ? "#c9184a" : "#868686"; //"#c9184a"//i % 2 === 0 ? "#c9184a" : "#0077b6"; // alternate colors
       var marker = L.marker([loc.lat, loc.lon], {icon: coloredIcon(color)}).addTo(map)
         .bindPopup(
           `<div>
@@ -1329,4 +1329,5 @@
 	
   </script>
 </body>
+
 </html>
