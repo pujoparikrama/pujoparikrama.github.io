@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Kolkata Durga Puja Map 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body, html { margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif; }
+    #container { display: flex; height: 100vh; }
+	/* Hide toggle button on desktop */
+#toggleBtn {
+  display: none;
+}
+
+/* Show on mobile (max-width 768px) */
+@media (max-width: 768px) {
+  #toggleBtn {
+    display: block;
+  }
+}
+.sidebar-header {
+  position: sticky;
+  top: 0;
+  background: #fff;  /* keep same as sidebar */
+  padding: 10px;
+  z-index: 3;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.sidebar-header input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+	
+    #sidebar {
+      width: 440px; background: #fff;
+      border-right: 1px solid #ddd;
+      overflow-y: auto; display: flex;
+      flex-direction: column; box-shadow: 2px 0 6px rgba(0,0,0,0.08);
+      z-index: 1000; transition: transform 0.3s ease;
+    }
+    #sidebar h2 {
+      margin: 0; font-size: 20px; text-align: center;
+      padding: 16px; background: linear-gradient(135deg,#c9184a,#ff4d6d);
+      color: white; font-weight: 600;
+    }
+    #searchBox {
+      padding: 10px; margin: 10px;
+      border: 1px solid #ccc; border-radius: 8px;
+      font-size: 14px; width: 90%;
+    }
+    #placesList { padding: 12px; }
+    .place {
+      padding: 14px; margin-bottom: 10px;
+      background: #ffffff; border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .place:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      background: #fdf2f8;
+    }
+    .place strong { display: block; font-size: 15px; color: #c9184a; }
+    #map { flex: 1; }
+    .leaflet-popup-content-wrapper { border-radius: 10px; }
+    .leaflet-popup-content strong { font-size: 14px; color: #c9184a; }
+    .leaflet-popup-content a {
+      display: inline-block; margin-top: 6px;
+      padding: 6px 10px; background: #c9184a;
+      color: white !important; text-decoration: none;
+      border-radius: 6px; font-size: 12px;
+    }
+    .leaflet-popup-content a:hover { background: #ff4d6d; }
+.leaflet-control-attribution {
+  top: 5px !important;   /* distance from top */
+}
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      #container { flex-direction: column; }
+      #sidebar {
+        position: fixed; width:100vw; bottom: 0; left: 0; right: 0;
+        height: 50vh; transform: translateY(100%);
+        border-right: none; border-top: 1px solid #ddd;
+        box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+		z-index: 1000;
+      }
+      #sidebar.open { transform: translateY(0); }
+      #map { flex: none; height: 100%; }
+      #toggleBtn {
+        position: absolute; top: 30px; right: 10px; z-index: 2000;
+        background: #c9184a; color: white; border: none; border-radius: 6px;
+        padding: 8px 12px; font-size: 14px; cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <button id="toggleBtn">☰ Pandals </button>
+    <div id="sidebar">
+	<div class="sidebar-header">
+      <h2>🌸 Kolkata Durga Puja 2025</h2>
+      <input type="text" id="searchBox" placeholder="Search Puja name...">
+	 </div>
+      <div id="placesList"></div>
+    </div>
+    <div id="map"></div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map' ,{
+			attributionControl: false
+		}).setView([22.5726, 88.3639], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+	L.control.attribution({position: 'topright'}).addTo(map);
+	
+
+    // Custom colored icon
+    function coloredIcon(color) {
+      return L.divIcon({
+        html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="${color}" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`,
+        className: "",
+        iconSize: [28, 28],
+        iconAnchor: [14, 28],
+        popupAnchor: [0, -25]
+      });
+    }
+
+    var locations = [
+       {
+        name:"অর্জুনপুর আমরা সবাই ক্লাব",
+        engname: "Arjunpur Amra Sabai Club",
+        lat: 22.624235, lon:  88.424511,
+        theme: "অন্যদেশ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.624235, 88.424511",
+        video1: "https://www.youtube.com/watch?v=nxeyxbPj7hg"
+      },
+      {
+        name:"শাস্ত্রী বাগান স্পোর্টিং ক্লাব",
+        engname: "Shastri Bagan Sporting Club",
+        lat: 22.6129348, lon: 88.4266096,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6129348,88.4266096",
+        video1: "https://www.facebook.com/shastribagansportingclub/videos/1647144689188107",
+        video2: "https://www.youtube.com/watch?v=5gfKDydFa4Q"},
+      {
+        name:"রেলপুকুর ইউনাইটেড ক্লাব",
+        engname: "Railpukur United club",
+        lat: 22.6124668, lon: 88.4160766,
+        theme: "চক্রবুহ্য",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6124668,88.4160766",
+        video1: "https://www.facebook.com/100038994686344/videos/849910333838490"
+      },
+      {
+        name:"টালা পনেরো (15) পল্লি দুর্গা পূজা",
+        engname: "Tala Ponero (15) Pally Durga Puja",
+        lat: 22.6122336, lon: 88.3815326,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6122336,88.3815326",
+        video1: ""
+      },
+      {
+        name:"দক্ষিণপাড়া দুর্গোৎসব ",
+        engname: "Dakshinpara Durgotsab ",
+        lat: 22.612186, lon:  88.421748,
+        theme: "তরঙ্গ ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.612186, 88.421748",
+        video1: "https://www.facebook.com/watch/?v=513480914728021&ref=sharing",
+        video2: "https://www.youtube.com/watch?v=Vx3UkQxHZHE"},
+      {
+        name:"দমদম তরুণ দল ",
+        engname: "Dum Dum Tarun Dal ",
+        lat: 22.611178, lon:  88.418462,
+        theme: "নীল সাদা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.611178, 88.418462",
+        video1: "https://www.youtube.com/watch?v=rfdCin18XwM"
+      },
+      {
+        name:"পাতিপুকুর আদি সর্বজনীন ",
+        engname: "Patipukur Adi Sarbojonin",
+        lat: 22.610981394120497, lon:  88.39785148700624,
+        theme: "বসুন্ধরা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.610981394120497, 88.39785148700624",
+        video1: "https://www.facebook.com/watch/?v=1061478755653526"
+      },
+      {
+        name:"দমদম পার্ক তরুন সংঘ",
+        engname: "Dum Dum Park Tarun Sangha",
+        lat: 22.610814, lon:  88.413799,
+        theme: "মুক্তধারা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.610814, 88.413799",
+        video1: "https://www.youtube.com/watch?v=94g4ncrtc8w"
+      },
+      {
+        name:"দমদম পার্ক ভারত চক্র",
+        engname: "Dum Dum Park Bharat Chakra",
+        lat: 22.610796, lon:  88.414658,
+        theme: "উড়ান ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.610796, 88.414658",
+        video1: "https://www.facebook.com/watch/?v=1190134048924421&ref=sharing"
+      },
+      {
+        name:"অশ্বিনীনগর বন্ধুমহল ক্লাব",
+        engname: "Aswininagar Bandhumahal Club",
+        lat: 22.610006, lon:  88.432922,
+        theme: "বারো ইয়ারী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.610006, 88.432922",
+        video1: "https://www.youtube.com/watch?v=KHX4pYqIwZY"
+      },
+      {
+        name:"টালা প্রত্যয়",
+        engname: "Tala Prattoy",
+        lat: 22.609862, lon:  88.383175,
+        theme: "বিহীন .. the void",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.609862, 88.383175",
+        video1: "https://www.youtube.com/watch?v=VkNBPmgUCxc"
+      },
+      {
+        name:"দমদম পার্ক সর্বজনীন ",
+        engname: "Dum Dum Park Sarbojanin ",
+        lat: 22.6094412, lon: 88.4138303,
+        theme: "মানব জামিন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6094412,88.4138303",
+        video1: "https://www.youtube.com/watch?v=S7McHRvlIYk"
+      },
+      {
+        name:"লেক টাউন নেতাজি স্পোর্টিং ক্লাবে",
+        engname: "Netaji Sporting Club",
+        lat: 22.6077285, lon: 88.4001762,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6077285,88.4001762",
+        video1: ""
+      },
+      {
+        name:"কেষ্টপুর প্রফুল্ল কানন (পশ্চিম) অধিবাসীবৃন্দ",
+        engname: "Prafulla Kanan Paschim Adhibasi Brinda",
+        lat: 22.607492814898606, lon:  88.42138680203638,
+        theme: "৫১ একান্ন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.607492814898606, 88.42138680203638",
+        video1: "https://www.youtube.com/watch?v=Q0knAlfC9cM"
+      },
+      {
+        name:"বেলগাছিয়া সাধারণ দুর্গোৎসব (টালা পার্ক)",
+        engname: "Belgachia Sadharan Durgotsav (Tala Park)",
+        lat: 22.607306, lon:  88.383168,
+        theme: "পালকি কথা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.607306, 88.383168",
+        video1: "https://www.facebook.com/jaydeep.saha/videos/1665222900937010/"
+      },
+      {
+        name:"টালা বারোয়ারি ",
+        engname: "Tala Barowari",
+        lat: 22.607219, lon:  88.375912,
+        theme: "হীরা-মানিক জ্বলে/হীরক রাজার দেশে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.607219, 88.375912",
+        video1: "https://www.youtube.com/watch?v=N4D35SqEWjo"
+      },
+      {
+        name:"দমদম পার্ক যুবক বৃন্দ",
+        engname: "Dum Dum Park Yubak Brinda",
+        lat: 22.6069292, lon: 88.4113327,
+        theme: "ভিটে মাটি ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6069292,88.4113327",
+        video1: "https://www.facebook.com/ddpyubakbrinda/videos/1218179806090452"
+      },
+      {
+        name:"বাগবাজার সার্বজনীন",
+        engname: "Baghbazar Sarbojanin",
+        lat: 22.604436, lon:  88.365624,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.604436, 88.365624",
+        video1: ""
+      },
+      {
+        name:"লেকটাউন অধিবাসীবৃন্দ",
+        engname: "Lake Town Adhibasi Brinda ",
+        lat: 22.604383, lon:  88.403928,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.604383, 88.403928",
+        video1: ""
+      },
+      {
+        name:"মাষ্টারদা স্মৃতি সংঘ",
+        engname: "Master Da Smriti Sangha Club",
+        lat: 22.6038186, lon: 88.4200012,
+        theme: "সভ্যতার রক্ষা কবচ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6038186,88.4200012",
+        video1: "https://www.facebook.com/masterda.smritisangha/videos/4024012954487381"
+      },
+      {
+        name:"উল্টাডাঙা জাগরণী সংঘ",
+        engname: "Ultadanga Jagarani Sangha",
+        lat: 22.6038186, lon: 88.4200012,
+        theme: "নেপথ্যে ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6038186,88.4200012",
+        video1: "https://www.youtube.com/watch?v=m5DquRgpTTc"
+      },
+      {
+        name:"প্রফুল্ল কানন বালক বৃন্দ ক্লাব (ইস্ট)",
+        engname: "Prafulla Kanan Balak Brinda East ",
+        lat: 22.601996728972722, lon:  88.4248571785776,
+        theme: "পিত্রালয় ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.601996728972722, 88.4248571785776",
+        video1: "https://www.youtube.com/watch?v=hb_TY8Llubo"
+      },
+      {
+        name:"কুমোরটুলি সার্বজনীন দুর্গোৎসব",
+        engname: "Kumartuli Sarbojanin Durgotsab",
+        lat: 22.601178, lon:  88.362580,
+        theme: "ক্ষুধা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.601178, 88.362580",
+        video1: "https://www.youtube.com/watch?v=zHH-AOVIXTw"
+      },
+      {
+        name:"শ্যামবাজার পল্লী সংঘ",
+        engname: "Shyambazar Pally Sangha",
+        lat: 22.6000613, lon: 88.3668115,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.6000613,88.3668115",
+        video1: ""
+      },
+      {
+        name:"বিধান সরণি এ্যাটলাস ক্লাব",
+        engname: "Bidhan Sarani Atlas Club",
+        lat: 22.5996909, lon: 88.3703432,
+        theme: "সারণীর বিধান ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5996909,88.3703432",
+        video1: "https://www.facebook.com/100063733672395/videos/472897592567356"
+      },
+      {
+        name:"এ জি ব্লক দূর্গা পূজা কমিটি সল্টলেকে",
+        engname: "AG Block Durga puja commitee saltlake",
+        lat: 22.5996504, lon: 88.4221626,
+        theme: "প্রাপ্তি",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5996504,88.4221626",
+        video1: "https://www.facebook.com/watch/?v=524901473493811"
+      },
+      {
+        name:"শ্রীভূমি স্পোর্টিং ক্লাব",
+        engname: "Sree Bhumi Sporting Club",
+        lat: 22.5996469, lon: 88.4001991,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5996469,88.4001991",
+        video1: ""
+      },
+      {
+        name:"জগৎ মুখার্জী পার্ক",
+        engname: "Jagat Mukherjee Park",
+        lat: 22.599429, lon:  88.366053,
+        theme: "UNDERWATER METRO",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.599429, 88.366053",
+        video1: "https://www.facebook.com/watch/?v=513751578101790&ref=sharing",
+        video2: "https://www.youtube.com/watch?v=8aJ0iAl_umQ"},
+      {
+        name:"কুমারটুলি পার্ক সর্বজনীন দুর্গোৎসব",
+        engname: "Kumartuli Park Sarbojanin Durgaotsab ",
+        lat: 22.599115147466943, lon:  88.36137510096907,
+        theme: "মহিষাসুরমর্দিনী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.599115147466943, 88.36137510096907",
+        video1: "https://www.facebook.com/watch/?v=1516872049196637&ref=sharing"
+      },
+      {
+        name:"এ ই (পার্ট-1) দূর্গা পূজা কমিটি সল্টলেকে",
+        engname: "AE (Part-1) Durga Puja saltlake",
+        lat: 22.598590, lon:  88.409115,
+        theme: "অরণ্যের প্রাচীন প্রবাদ ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.598590, 88.409115",
+        video1: "https://www.youtube.com/watch?v=8H98KRpXeXM"
+      },
+      {
+        name:"গোলাঘাটা সম্মেলনী ক্লাব",
+        engname: "Golaghata Sammelani Club",
+        lat: 22.5973439, lon: 88.3965709,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5973439,88.3965709",
+        video1: ""
+      },
+      {
+        name:"সিকদার বাগান সাধারণ দুর্গোৎসব",
+        engname: "Sikdar Bagan Sadharan Durgotsov",
+        lat: 22.596628, lon:  88.371982,
+        theme: "মানবতার উৎসব",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.596628, 88.371982",
+        video1: "https://www.youtube.com/watch?v=UXMxCuEjfak"
+      },
+      {
+        name:"উল্টোডাঙা যুব বৃন্দ ",
+        engname: "Ultadanga Yuba Brinda",
+        lat: 22.595916, lon: 88.3775518,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.595916,88.3775518",
+        video1: ""
+      },
+      {
+        name:"হাতিবাগান নবীন পল্লী",
+        engname: "Hatibagan Nabinpally",
+        lat: 22.595887, lon:  88.373429,
+        theme: "থিয়েটার পাড়া",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.595887, 88.373429",
+        video1: "https://www.youtube.com/watch?v=p8Xv4cUoR6s"
+      },
+      {
+        name:"নর্থ ত্রিধারা সার্বজনীন",
+        engname: "North Tridhara Sarbojanin",
+        lat: 22.59586861715477, lon:  88.37454074398822,
+        theme: "সলতে ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.59586861715477, 88.37454074398822",
+        video1: "https://www.youtube.com/watch?v=-aa_LD78Nn0"
+      },
+      {
+        name:"উল্টোডাঙ্গা পল্লীশ্রী ",
+        engname: "Ultadanga Pallyshree",
+        lat: 22.5958064, lon: 88.3819759,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5958064,88.3819759",
+        video1: ""
+      },
+      {
+        name:"শোভাবাজার বড়তলা সর্বজনীন দুর্গোৎসব সমিতি",
+        engname: "Sovabazar Burtolla Sarbojanin Durgotsav Samity",
+        lat: 22.595740644219838, lon:  88.36437795066924,
+        theme: "ধন-ধান্য",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.595740644219838, 88.36437795066924",
+        video1: "https://www.youtube.com/watch?v=Q1P_TlyQL1w"
+      },
+      {
+        name:"বেনিয়াটোলা সার্বজনীন দুর্গোৎসব",
+        engname: "Beniatola Sarbojonin Durgotsab",
+        lat: 22.5957341, lon: 88.3563179,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5957341,88.3563179",
+        video1: ""
+      },
+      {
+        name:"করবাগান সার্বজনীন দুর্গোৎসব",
+        engname: "Karbagan Sarbojanin",
+        lat: 22.595389, lon:  88.383719,
+        theme: "ভবপ্রীতা ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.595389, 88.383719",
+        video1: "https://www.youtube.com/watch?v=AGcBhao2D14"
+      },
+      {
+        name:"দক্ষিণদাড়ি ইয়ুথস সর্বজনীন দুর্গোৎসব",
+        engname: "Dakshindari Youth Sarbojanin Durgotsab",
+        lat: 22.595251, lon:  88.393874,
+        theme: "সিংহ বাহিনী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.595251, 88.393874",
+        video1: "https://www.facebook.com/watch/?v=1479397949435007&ref=sharing"
+      },
+      {
+        name:"তেলেঙ্গা বাগান",
+        engname: "Telenga Bagan",
+        lat: 22.594892, lon:  88.385421,
+        theme: "পৃথিবী গদ্যময়",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.594892, 88.385421",
+        video1: "https://www.youtube.com/watch?v=plC6ubN4FN0"
+      },
+      {
+        name:"আহিরীটোলা সর্বজনীন দুর্গোৎসব সমিতি",
+        engname: "Ahiritola Sarbojonin Durgotsab Samity",
+        lat: 22.594870, lon:  88.357286,
+        theme: "খেয়াল সেতুর বৈতরণী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.594870, 88.357286",
+        video1: "https://www.youtube.com/watch?v=FKXI62xFl4Q",
+        video2: "https://www.facebook.com/watch/?v=1492797388262460&ref=sharing"},
+      {
+        name:"গৌরিবেরিয়া সর্বজনীন দুর্গোৎসব ",
+        engname: "Gouriberia Sarbojanin Durgotsab",
+        lat: 22.594709, lon:  88.379102,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.594709, 88.379102",
+        video1: "https://www.youtube.com/watch?v=xCTxBGzqFjY"
+      },
+      {
+        name:"আহিরীটোলা যুবকবৃন্দ দুর্গাপূজা",
+        engname: "Ahiritola Jubak Brinda Durgapuja",
+        lat: 22.5945928, lon: 88.3602368,
+        theme: "আকারের মহাযাত্রা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5945928,88.3602368",
+        video1: "https://www.youtube.com/watch?v=DV2w_AkmquE",
+        video2: "https://www.youtube.com/watch?v=ZO-lApfh5iI"},
+      {
+        name:"হাতিবাগান সর্বজনীন দুর্গোৎসব",
+        engname: "Hatibagan Sarbojanin Durgotsav",
+        lat: 22.594446, lon:  88.371945,
+        theme: "প্রকরণ - PROCESS",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.594446, 88.371945",
+        video1: "https://www.youtube.com/watch?v=i_oOJAgehZw",
+        video2: "https://www.youtube.com/watch?v=F5IiI3eQ8vU"},
+      {
+        name:"অরবিন্দ সেতু সার্বজনীন উল্টাডাঙ্গা ",
+        engname: "AUROBINDA SETU SARBOJONIN DURGAPUJA SOMITI (ULTADANGA)",
+        lat: 22.5944268, lon: 88.3805866,
+        theme: "ফোটকের স্বপ্ন ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5944268,88.3805866",
+        video1: "https://www.youtube.com/watch?v=qMpcntU9GE8",
+        video2: "https://www.youtube.com/watch?v=6K5RljGWQP4"},
+      {
+        name:"নলিন সরকার স্ট্রীট সার্বজনীন দুর্গোৎসব",
+        engname: "Nalin Sarkar Street Sarbojonin Durgotsab",
+        lat: 22.594259, lon:  88.374345,
+        theme: "শহরনামা ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.594259, 88.374345",
+        video1: "https://www.youtube.com/watch?v=X2iT_7fBOEk"
+      },
+      {
+        name:"উল্টাডাঙ্গা বিধান সংঘ",
+        engname: "Ultadanga Bidhan Sangha",
+        lat: 22.593231, lon:  88.385588,
+        theme: "বাণিজ্যে বসতে লক্ষী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.593231, 88.385588",
+        video1: "https://www.youtube.com/watch?v=R47YwZXpL5M"
+      },
+      {
+        name:"এ জে ব্লক সল্টলেকে",
+        engname: "Saltlake AJ  Block ",
+        lat: 22.592425, lon:  88.429247,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.592425, 88.429247",
+        video1: ""
+      },
+      {
+        name:"কাশি বোস লেন দূর্গা পূজা সমিতি",
+        engname: "Kashi Bose Lane Durga Puja Samity",
+        lat: 22.590965667770266, lon:  88.36884061664797,
+        theme: "রত্নগর্ভা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.590965667770266, 88.36884061664797",
+        video1: "https://www.youtube.com/watch?v=YsDRMSir1UQ"
+      },
+      {
+        name:"বি জে ব্লক সল্টলেকে",
+        engname: "Saltlake BJ  Block ",
+        lat: 22.590775, lon:  88.426872,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.590775, 88.426872",
+        video1: ""
+      },
+      {
+        name:"বিডন স্ট্রিট সর্বজনীন দুর্গোৎসব",
+        engname: "Beadon Street Sarbojanin Durgotsav",
+        lat: 22.5895521, lon: 88.3663011,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5895521,88.3663011",
+        video1: ""
+      },
+      {
+        name:"গোয়াবাগান শারদোৎসব সম্মিলনী",
+        engname: "Goabagan Sarodatsav Sammilani",
+        lat: 22.589341, lon:  88.371728,
+        theme: "কদর",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.589341, 88.371728",
+        video1: "https://www.facebook.com/watch/?v=571521355231378&ref=sharing"
+      },
+      {
+        name:"AK এসোসিয়েশন সল্টলেক দুর্গোৎসব",
+        engname: "Ak Association Saltlake Durgotsav",
+        lat: 22.588837, lon:  88.430860,
+        theme: "বারিবিন্দু",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.588837, 88.430860",
+        video1: "https://www.facebook.com/watch/?v=464293033306750&ref=sharing"
+      },
+      {
+        name:"পাথুরিয়াঘাটা পাঁচের পল্লী সার্বজনীন দুর্গোৎসব কমিটি",
+        engname: "Pathuriaghata Pancher Pally Sarbojonin Durgotsab Committee",
+        lat: 22.5885446, lon: 88.3576808,
+        theme: "ব্রত পার্বণ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5885446,88.3576808",
+        video1: ""
+      },
+      {
+        name:"লালাবাগান নবাঙ্কুর",
+        engname: "Lalabagan Nabankur",
+        lat: 22.5884123613621, lon:  88.37680310985614,
+        theme: "লালবাগানে নবাঙ্কুর",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5884123613621, 88.37680310985614",
+        video1: "https://www.youtube.com/watch?v=DRpJuUXMzp4"
+      },
+      {
+        name:"লালাবাগান সার্বজনীন",
+        engname: "Lalabagan Sarbojanin ",
+        lat: 22.5873665, lon: 88.3742997,
+        theme: "শোষণ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5873665,88.3742997",
+        video1: ""
+      },
+      {
+        name:"দর্পনারায়ণ ঠাকুর স্ট্রীট পোস্তা পল্লী সমিতি ",
+        engname: "Darpanarayan Tagore Street Pally Samity",
+        lat: 22.587198, lon:  88.354364,
+        theme: "বহন ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.587198, 88.354364",
+        video1: "https://www.facebook.com/100064602133113/videos/1916508025517745"
+      },
+      {
+        name:"জোড়াসাঁকো সাধারণ দুর্গোৎসব সমিতি",
+        engname: "Jorasanko Sadharan Durgotsav Samity",
+        lat: 22.586267, lon:  88.360559,
+        theme: "মুক্তি ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.586267, 88.360559",
+        video1: "https://www.youtube.com/watch?v=p16tzbUMnLQ"
+      },
+      {
+        name:"সিমলা ব্যায়াম সমিতি",
+        engname: "Simla Byayam Samity",
+        lat: 22.585411, lon:  88.364890,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.585411, 88.364890",
+        video1: ""
+      },
+      {
+        name:"মানিকতলা বিবেকানন্দ সার্বজনীন দুর্গোৎসব",
+        engname: "Vivekananda Sarbojonin Durgatsob Committee",
+        lat: 22.585340, lon:  88.375307,
+        theme: "মুখাখেলা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.585340, 88.375307",
+        video1: ""
+      },
+      {
+        name:"চলতাবাগান সার্বজনীন দূর্গাপূজা",
+        engname: "Chaltabagan Sarbojanin durga puja",
+        lat: 22.585166, lon:  88.368977,
+        theme: "অন্তরলোক ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.585166, 88.368977",
+        video1: "https://www.youtube.com/watch?v=Z-Dct1AdnG8"
+      },
+      {
+        name:"সিমলা স্পোর্টিং ক্লাব ",
+        engname: "Simla Sporting Club",
+        lat: 22.584909, lon:  88.366676,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.584909, 88.366676",
+        video1: ""
+      },
+      {
+        name:"মানিকতলা চলতাবাগান লোহাপাটি",
+        engname: "Maniktala chaltabagan lohapatty",
+        lat: 22.584867, lon:  88.372159,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.584867, 88.372159",
+        video1: ""
+      },
+      {
+        name:"মানিকতলা চলতাবাগান লোহাপাটি দুর্গোৎসব",
+        engname: "Maniktala chaltabagan lohapatty Durgotsav",
+        lat: 22.5848441, lon: 88.372086,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5848441,88.372086",
+        video1: ""
+      },
+      {
+        name:"এফডি ব্লক সল্টলেকে",
+        engname: "Salt Lake FD Block",
+        lat: 22.584277, lon:  88.411597,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.584277, 88.411597",
+        video1: ""
+      },
+      {
+        name:"রামমোহন স্মৃতি সংঘ",
+        engname: "Ram Mohan Smriti Sangha",
+        lat: 22.5841155, lon: 88.3696692,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5841155,88.3696692",
+        video1: ""
+      },
+      {
+        name:"জোড়াসাঁকো ৭ পল্লী সার্বজনীন",
+        engname: "Jorasanko 7 Palli Sarbojonin",
+        lat: 22.583988, lon:  88.361318,
+        theme: "শুচি ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.583988, 88.361318",
+        video1: "https://www.youtube.com/watch?v=cfyK9pKsRj4"
+      },
+      {
+        name:"চোরবাগান সর্বজনীন দুর্গোৎসব সমিতি",
+        engname: "Chorebagan Sarbojonin Durgotsab Samity",
+        lat: 22.583519, lon:  88.363145,
+        theme: "দুগ্গা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.583519, 88.363145",
+        video1: "https://www.youtube.com/watch?v=QFUz5x37u5s"
+      },
+      {
+        name:"বৃন্দাবন মাতৃ মন্দির, সুকিয়া স্ট্রিট",
+        engname: "Brindaban Matri Mandir ",
+        lat: 22.5827221, lon: 88.3703304,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5827221,88.3703304",
+        video1: ""
+      },
+      {
+        name:"কাঁকুড়গাছি চলন্তিকা ক্লাব",
+        engname: "Kankurgachi Chalantika Club",
+        lat: 22.581630, lon:  88.391948,
+        theme: "দুই বিঘা জমি",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.581630, 88.391948",
+        video1: "https://www.facebook.com/watch/?v=2299723800386474"
+      },
+      {
+        name:"রামমোহন সম্মিলনী",
+        engname: "Rammohan Sammilani",
+        lat: 22.581550, lon:  88.375070,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.581550, 88.375070",
+        video1: ""
+      },
+      {
+        name:"রামমোহন সম্মিলনী",
+        engname: "Rammohan Sammilani",
+        lat: 22.58154190345304, lon:  88.37511670298764,
+        theme: "সম্পন্না ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.58154190345304, 88.37511670298764",
+        video1: "https://www.youtube.com/watch?v=DusdbOLb5vg"
+      },
+      {
+        name:"মিতালী সংঘ ",
+        engname: "Mitali Kankurgachi",
+        lat: 22.580011, lon:  88.394063,
+        theme: "উপাসনা ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.580011, 88.394063",
+        video1: ""
+      },
+      {
+        name:"কাঁকুড়গাছি যুবক বৃন্দ",
+        engname: "Kankurgachi Jubak Brinda",
+        lat: 22.579325, lon:  88.388189,
+        theme: "রূপকার ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.579325, 88.388189",
+        video1: "https://www.youtube.com/watch?v=D1fjkBd6mYo"
+      },
+      {
+        name:"মহম্মদ আলী পার্ক",
+        engname: "Muhammad Ali Park",
+        lat: 22.5771937, lon: 88.358162,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5771937,88.358162",
+        video1: ""
+      },
+      {
+        name:"কলেজ স্কোয়ার সার্বজনীন দুর্গোৎসব কমিটি",
+        engname: "College Square Sarbojanin Durgotsab Committee",
+        lat: 22.574954, lon:  88.363202,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.574954, 88.363202",
+        video1: ""
+      },
+      {
+        name:"আই বি ব্লক সল্টলেকে",
+        engname: "Saltlake IB Block ",
+        lat: 22.572528, lon:  88.413907,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.572528, 88.413907",
+        video1: ""
+      },
+      {
+        name:"বেলিয়াঘাটা 33 পল্লি",
+        engname: "Beliaghata 33 Pally",
+        lat: 22.5690058, lon: 88.3910546,
+        theme: "কোহি-নূর",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5690058,88.3910546",
+        video1: "https://www.youtube.com/watch?v=yFGVZFMiTOM",
+        video2: "https://www.youtube.com/watch?v=QpIZRr7Il8g"},
+      {
+        name:"সন্তোষ মিত্র স্কোয়ার সার্বজনীন দুর্গোৎসব সমিতি",
+        engname: "Santosh Mitra Square Sarbojanin Durgotsab Samity",
+        lat: 22.565903, lon:  88.364962,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.565903, 88.364962",
+        video1: ""
+      },
+      {
+        name:"বেলিয়াঘাটা সন্ধানী ক্লাব দুর্গাপূজা",
+        engname: "Beliaghata Sandhani Club Durgapuja",
+        lat: 22.564942, lon:  88.396428,
+        theme: "PLATFORM NO. 1/3",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.564942, 88.396428",
+        video1: "https://www.facebook.com/sandhaniclub/videos/2805451396304272/"
+      },
+      {
+        name:"ওয়েলিংটন নাগরিক কল্যাণ সমিতি",
+        engname: "Wellington Nagarik Kalyan Samity",
+        lat: 22.564493, lon:  88.358299,
+        theme: "অন্তর ও বাহির ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.564493, 88.358299",
+        video1: "https://www.youtube.com/watch?v=_0_PYLcD1DM",
+        video2: "https://www.facebook.com/aayanmyslf/videos/1916008872555839/"},
+      {
+        name:"খিদিরপুর যুবক সংঘ ক্লাব",
+        engname: "Khidderpore Jubak Sangha Club  ",
+        lat: 22.541281, lon:  88.319775,
+        theme: "অস্তিত্ব রক্ষা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.541281, 88.319775",
+        video1: "https://www.youtube.com/watch?v=VjwmGmVuCq0"
+      },
+      {
+        name:" ৭৪ পল্লী সর্ব্বজনীন দূর্গোৎসব খিদিরপুর",
+        engname: "Khidderpore's 74 Pally Sarvajanin Durga Utsav",
+        lat: 22.539635, lon:  88.325224,
+        theme: "ডাকে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.539635, 88.325224",
+        video1: "https://www.facebook.com/stobdhohin/videos/1266811470985045"
+      },
+      {
+        name:"খিদিরপুর 25 পল্লী",
+        engname: "Khidirpur 25 Palli",
+        lat: 22.539144, lon:  88.326441,
+        theme: "পরিচারণ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.539144, 88.326441",
+        video1: "https://www.youtube.com/watch?v=zA3gWTTDUKg",
+        video2: "https://www.youtube.com/watch?v=zA3gWTTDUKg"},
+      {
+        name:"চক্রবেড়িয়া সর্বজনীন ",
+        engname: "Chakraberia Sarbojanin Durgotsab",
+        lat: 22.533577, lon:  88.351914,
+        theme: "নির্বাক",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.533577, 88.351914",
+        video1: "https://www.youtube.com/watch?v=UlQyNG2jeYw"
+      },
+      {
+        name:"বালিগঞ্জ 21 পল্লী",
+        engname: "Ballygunge 21 Pally",
+        lat: 22.529117, lon:  88.368823,
+        theme: "সংবাহন (কুলি)",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.529117, 88.368823",
+        video1: "https://www.facebook.com/watch/?v=2415378558665110"
+      },
+      {
+        name:"অবসর সর্বজনীন দুর্গোৎসব সমিতি",
+        engname: "Abasar Sarbojanin Durgotsab Samity",
+        lat: 22.528053, lon:  88.348430,
+        theme: "মহল্লা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.528053, 88.348430",
+        video1: "https://www.facebook.com/100063532645730/videos/424758930259484"
+      },
+      {
+        name:"বকুল বাগান সর্বজনীন দুর্গোৎসব",
+        engname: "Bakul Bagan Sarbojanin Durgotsav",
+        lat: 22.526711, lon:  88.348212,
+        theme: "মাসান",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.526711, 88.348212",
+        video1: "https://www.youtube.com/watch?v=ukYejJcigWo"
+      },
+      {
+        name:"হাজরা পার্ক সর্বজনীন",
+        engname: "Hazra Park Sarbojanin",
+        lat: 22.524538, lon:  88.346241,
+        theme: "শুদ্ধি",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.524538, 88.346241",
+        video1: "https://www.facebook.com/watch/?v=376687842064749&ref=sharing"
+      },
+      {
+        name:"কালীঘাট মিলন সংঘ",
+        engname: "Kalighat Milan Sangha",
+        lat: 22.524303, lon:  88.340953,
+        theme: "মানতপুরী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.524303, 88.340953",
+        video1: "https://www.youtube.com/watch?v=1NXig1n7aj0"
+      },
+      {
+        name:"একডালিয়া এভারগ্রীন ক্লাব",
+        engname: "Ekdalia Evergreen Club",
+        lat: 22.521236, lon:  88.366694,
+        theme: "",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.521236, 88.366694",
+        video1: ""
+      },
+      {
+        name:"সিংহী পার্ক সর্বজনীন",
+        engname: "Singhi Park Sarbojanin ",
+        lat: 22.521033, lon:  88.363104,
+        theme: "সাতমহলার অন্তঃপুরে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.521033, 88.363104",
+        video1: "https://www.facebook.com/watch/?v=1267795344571846&ref=sharing"
+      },
+      {
+        name:"হিন্দুস্তান ক্লাব",
+        engname: "Hindustan Club",
+        lat: 22.520160, lon:  88.360937,
+        theme: "বন্ধনহীন গ্রন্থি",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.520160, 88.360937",
+        video1: "https://www.youtube.com/watch?v=TrtZyYx3isw"
+      },
+      {
+        name:"ত্রিধারা সম্মিলনী",
+        engname: "Tridhara Sammilani",
+        lat: 22.519460, lon:  88.355392,
+        theme: "অজ্ঞান",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.519460, 88.355392",
+        video1: ""
+      },
+      {
+        name:"বোসপুকুর শীতলা মন্দির",
+        engname: "Bosepukur Sitala Mandir",
+        lat: 22.519215, lon:  88.384982,
+        theme: "স ঞ্চ য়",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.519215, 88.384982",
+        video1: "https://www.facebook.com/watch/?v=2383442668660250&ref=sharing"
+      },
+      {
+        name:"বোসপুকুর তালবাগান সার্বজনীন",
+        engname: "Bosepukur Talbagan Sarbojanin",
+        lat: 22.519124, lon:  88.383031,
+        theme: "রক্তকরবী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.519124, 88.383031",
+        video1: "https://www.facebook.com/watch/?v=775817797948060"
+      },
+      {
+        name:"71 পল্লী বৈশাখী সর্বজনীন দুর্গোৎসব",
+        engname: "71 Palli Baishakhi Sarbojanin Durgotsav",
+        lat: 22.519061, lon:  88.368566,
+        theme: "অন্দরে অন্তরে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.519061, 88.368566",
+        video1: "https://www.facebook.com/watch/?v=515608584763733"
+      },
+      {
+        name:"আলিপুর সার্বজনীন",
+        engname: "Alipore Sarbojanin",
+        lat: 22.518387, lon:  88.333248,
+        theme: "সং-কল্প",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.518387, 88.333248",
+        video1: "https://www.facebook.com/watch/?v=510974335152058&ref=sharing"
+      },
+      {
+        name:"৬৬ পল্লী",
+        engname: "66 Pally Durga Puja ",
+        lat: 22.517994, lon:  88.342697,
+        theme: "স্বাদ কাহন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.517994, 88.342697",
+        video1: "https://www.youtube.com/watch?v=1Q37EsXiRs8",
+        video2: "https://www.youtube.com/watch?v=A6-_7IujwIM"},
+      {
+        name:"হিন্দুস্থান পার্ক সর্বজনীন",
+        engname: "Hindusthan Park Sarbojanin",
+        lat: 22.517990, lon:  88.361768,
+        theme: "কল্প ঋতুর গল্প গাঁথা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.517990, 88.361768",
+        video1: "https://www.facebook.com/watch/?v=1487891968582936&ref=sharing"
+      },
+      {
+        name:"বাদামতলা আষাঢ় সংঘ ",
+        engname: "Badamtala Ashar Sangha Durgotsab",
+        lat: 22.517939, lon:  88.343675,
+        theme: "উৎসবের চালচিত্রে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.517939, 88.343675",
+        video1: "https://www.youtube.com/watch?v=-Wxi7dD90PA"
+      },
+      {
+        name:"দেশপ্রিয় পার্ক",
+        engname: "Deshapriya Park",
+        lat: 22.517884, lon:  88.353633,
+        theme: "এবার ভুবনেশ্বরী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.517884, 88.353633",
+        video1: "https://www.facebook.com/watch/?v=1480222706015817&ref=sharing"
+      },
+      {
+        name:"রাজডাঙা নব উদয় সংঘ",
+        engname: "Rajdanga Naba Uday Sangha",
+        lat: 22.516730, lon:  88.390244,
+        theme: "ভারসাম্য ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.516730, 88.390244",
+        video1: "https://www.youtube.com/watch?v=8d7oaoAED_I",
+        video2: "https://www.youtube.com/watch?v=hy3735jI57o"},
+      {
+        name:"চেতলা অগ্রনী ক্লাব",
+        engname: "Chetla Agrani Club",
+        lat: 22.516499, lon:  88.337073,
+        theme: " কাশী বারাণসী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.516499, 88.337073",
+        video1: "https://www.facebook.com/watch/?v=24152095277823833&ref=sharing",
+        video2: "https://www.youtube.com/watch?v=xgM0d-oy1aA"},
+      {
+        name:"বালিগঞ্জ কালচারাল এসোশিয়েশন ",
+        engname: "Ballygunge Cultural Association",
+        lat: 22.516251, lon:  88.355762,
+        theme: "আরশিনগর",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.516251, 88.355762",
+        video1: "https://www.facebook.com/watch/?v=1606214156631018"
+      },
+      {
+        name:"সমাজ সেবী সংঘ",
+        engname: "Samaj Sebi Sangha",
+        lat: 22.515593, lon:  88.356161,
+        theme: "কর্ষণ ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.515593, 88.356161",
+        video1: "https://www.youtube.com/watch?v=OegEkiaIbqw",
+        video2: "https://www.youtube.com/watch?v=m30fDmjC014"},
+      {
+        name:"ত্রিকোণ পার্ক (প্রতাপাদিত্য রোড)",
+        engname: "Tricone Park (Pratapditya Road)",
+        lat: 22.513410, lon:  88.344614,
+        theme: "স্বপথ ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.513410, 88.344614",
+        video1: "https://www.youtube.com/watch?v=e7jZaLjJOKk"
+      },
+      {
+        name:"শিবমন্দির সর্বজনীন দুর্গোৎসব সমিতি",
+        engname: "Shibmandir Sarbojanin Durgotsab Samiti",
+        lat: 22.511144, lon:  88.349975,
+        theme: "ব্রাত্য ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.511144, 88.349975",
+        video1: "https://www.youtube.com/watch?v=cXapf40--V0"
+      },
+      {
+        name:"মুদিয়ালী ক্লাব",
+        engname: "Mudiali Club",
+        lat: 22.510152, lon:  88.346272,
+        theme: "ত্রি-মাত্রিক",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.510152, 88.346272",
+        video1: "https://www.facebook.com/watch/?v=508431078631237&ref=sharing"
+      },
+      {
+        name:"সুরুচি সংঘ",
+        engname: "Suruchi Sangha",
+        lat: 22.508961, lon:  88.333997,
+        theme: "পুরানো সেই দিনের কথা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.508961, 88.333997",
+        video1: "https://www.youtube.com/watch?v=rSdckWhnIlY"
+      },
+      {
+        name:"৯৫ পল্লী এসোসিয়েশন",
+        engname: "95 Pally Association",
+        lat: 22.508190, lon:  88.362770,
+        theme: "ভবতারিণী ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.508190, 88.362770",
+        video1: "https://www.youtube.com/watch?v=RjAs04tgkKQ",
+        video2: "https://www.youtube.com/watch?v=5yBaku4PSpE"},
+      {
+        name:"বেহালা ইয়াং মেনস অ্যাসোসিয়েশন",
+        engname: "Behala Young Mens Association",
+        lat: 22.506929, lon:  88.324837,
+        theme: "গতি",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.506929, 88.324837",
+        video1: "https://www.facebook.com/watch/?v=1063810371769878"
+      },
+      {
+        name:"বেহালা ক্লাব সর্বজনীন দুর্গোৎসব",
+        engname: "Behala Club Sarbojanin Durgotsav",
+        lat: 22.505227, lon:  88.314100,
+        theme: "আরণ‍্যক ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.505227, 88.314100",
+        video1: "https://www.youtube.com/watch?v=IE6Onn7rNTI"
+      },
+      {
+        name:"সেলিমপুর পল্লী ",
+        engname: "Selimpur Pally Sarbojanin ",
+        lat: 22.5050773, lon: 88.3660124,
+        theme: "গোধূলির স্বপ্ন ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.5050773,88.3660124",
+        video1: "https://www.facebook.com/aoumitra.das/videos/1263061658176126"
+      },
+      {
+        name:"পূর্বাচল শক্তি সংঘ",
+        engname: "Purbachal Shakti Sangha",
+        lat: 22.504928, lon:  88.388451,
+        theme: "কলকাতার মূর্তিকথা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.504928, 88.388451",
+        video1: "https://www.youtube.com/watch?v=BYRPHhSLhQ8"
+      },
+      {
+        name:"যোধপুর পার্ক ",
+        engname: "Jodhpur Park ",
+        lat: 22.504425, lon:  88.365692,
+        theme: "নি:স্বর নিস্তারিনী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.504425, 88.365692",
+        video1: "https://www.youtube.com/watch?v=LA_hRbqf1Ko"
+      },
+      {
+        name:"বেহালা বুড়োশিবতলা জনকল্যাণ সংঘ",
+        engname: "Behala Buroshibtala Janakalyan Sangha",
+        lat: 22.504164, lon:  88.330372,
+        theme: "দশ দিকে দশ লাখ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.504164, 88.330372",
+        video1: "https://www.facebook.com/watch/?v=1204542364088049"
+      },
+      {
+        name:"পল্লী মঙ্গল সমিতি",
+        engname: "Pally Mangal Samity",
+        lat: 22.502769, lon:  88.364644,
+        theme: "বহে নিরন্তর, অনন্ত আনন্দধারা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.502769, 88.364644",
+        video1: "https://www.facebook.com/watch/?v=526011443471860"
+      },
+      {
+        name:"পল্লি মঙ্গল সমিতি সর্বজনীন",
+        engname: "Pally Mangal Samity Sarbojanin",
+        lat: 22.502669, lon:  88.364765,
+        theme: "গোধূলির স্বপ্ন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.502669, 88.364765",
+        video1: "https://www.facebook.com/watch/?v=1263061658176126&ref=sharing"
+      },
+      {
+        name:"বেহালা দেবদারু ফটক ক্লাব",
+        engname: "Behala Debdaru Fatak Club",
+        lat: 22.502374, lon:  88.317904,
+        theme: "হৃদয় চিরলে দূর্গা পাবে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.502374, 88.317904",
+        video1: "https://www.youtube.com/watch?v=WjHxNWlDtXI",
+        video2: "https://www.youtube.com/watch?v=4oAOODTiwdM"},
+      {
+        name:"বেহালা নূতন দল",
+        engname: "Behala Nutan Dal",
+        lat: 22.500278, lon:  88.320238,
+        theme: "কল্পনা - ইমাজিনেশন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.500278, 88.320238",
+        video1: "https://www.facebook.com/reel/323194106988245"
+      },
+      {
+        name:"বেহালা আদর্শপল্লী সার্বজনীন দুর্গোৎসব",
+        engname: "Behala Adarshapally Sarbojanin Durgotsav",
+        lat: 22.4998027, lon: 88.3275677,
+        theme: "আশ্রয় ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.4998027,88.3275677",
+        video1: "https://www.youtube.com/watch?v=qBbza3uA78w"
+      },
+      {
+        name:"সন্তোষপুর ত্রিকোণ পার্ক ",
+        engname: "Santoshpur Trikon Park",
+        lat: 22.493138, lon:  88.378418,
+        theme: "উদযাপন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.493138, 88.378418",
+        video1: "https://www.facebook.com/watch/?v=405040945974742&ref=sharing"
+      },
+      {
+        name:"সন্তোষপুর এভিনিউ সাউথ পল্লিমঙ্গল সমিতি",
+        engname: "Santoshpur Avenue South Pallymangal Samity",
+        lat: 22.492169, lon:  88.379904,
+        theme: "আগমন গমন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.492169, 88.379904",
+        video1: "https://www.youtube.com/watch?v=90n69a_3BP4"
+      },
+      {
+        name:"সন্তোষপুর লেক পল্লী",
+        engname: "Santoshpur Lake Pally",
+        lat: 22.491704, lon:  88.382916,
+        theme: "চালচিত্র ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.491704, 88.382916",
+        video1: "https://www.facebook.com/watch/?v=1272788654078725&ref=sharing"
+      },
+      {
+        name:"শ্যামা পল্লী শ্যামা সংঘ",
+        engname: "Shyama Pally Shyama Sangha",
+        lat: 22.4905501, lon: 88.3638836,
+        theme: "জননেপথ্যে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.4905501,88.3638836",
+        video1: "https://www.youtube.com/watch?v=lks6TxQUbz0"
+      },
+      {
+        name:"যাদবপুর অ্যাথলেটিক ক্লাব",
+        engname: "Jadavpur Athletic Club",
+        lat: 22.488871, lon:  88.371680,
+        theme: "পুতুল গড়ার শহরে",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.488871, 88.371680",
+        video1: "https://www.youtube.com/watch?v=6iwfVy9BsVc"
+      },
+      {
+        name:"বাঘাযতীন তরুণ সংঘ",
+        engname: "BAGHAJATIN TARUN SANGHA",
+        lat: 22.484380, lon:  88.378576,
+        theme: "ইচ্ছেডানা - আমরা নারী, আমরা পারি",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.484380, 88.378576",
+        video1: "https://www.facebook.com/watch/?v=799778765472001"
+      },
+      {
+        name:"বাঘাযতীন বি & সি দুর্গা পূজা",
+        engname: "Baghajatin B & C Durga Puja",
+        lat: 22.484021, lon:  88.376077,
+        theme: "ভালোবাসার আলাদিন",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.484021, 88.376077",
+        video1: "https://www.facebook.com/watch/?v=518442500820977&ref=sharing"
+      },
+      {
+        name:"হরিদেবপুর ৪১ পল্লী ক্লাব",
+        engname: "Haridevpur 41 Pally Club",
+        lat: 22.482749, lon:  88.338699,
+        theme: "খিড়কি থেকে সিংহদুয়ার",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.482749, 88.338699",
+        video1: "https://www.facebook.com/watch/?v=3725071121155545"
+      },
+      {
+        name:"বাঘাযতীন ই-ব্লক সার্বজনীন দুর্গোৎসব",
+        engname: "Baghajatin E-Block Sarbojonin",
+        lat: 22.482464, lon:  88.379578,
+        theme: "স্মৃতিকথা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.482464, 88.379578",
+        video1: "https://www.facebook.com/watch/?v=1057075988885725&ref=sharing"
+      },
+      {
+        name:"বিবেকানন্দ পার্ক অ্যাথলেটিক ক্লাব",
+        engname: "Vivekananda Park Athletic Club",
+        lat: 22.481272, lon:  88.337323,
+        theme: "ব্যারিকেড",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.481272, 88.337323",
+        video1: "https://www.youtube.com/watch?v=kr8u9m2BgNQ"
+      },
+      {
+        name:"বড়িশা ক্লাব",
+        engname: "Barisha Club ",
+        lat: 22.481148, lon:  88.313337,
+        theme: "বসতি ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.481148, 88.313337",
+        video1: "https://www.youtube.com/watch?v=WgtDmPmdFzA"
+      },
+      {
+        name:"অজেয় সংহতি ক্লাব",
+        engname: "Ajeya Sanghati Club",
+        lat: 22.480835, lon:  88.337770,
+        theme: "ঈক্ষণ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.480835, 88.337770",
+        video1: "https://www.youtube.com/watch?v=1W1vIBnVzcA"
+      },
+      {
+        name:"হরিদেবপুর নিউ স্পোর্টিং ক্লাব",
+        engname: "Haridevpur New Sporting Club",
+        lat: 22.480071, lon:  88.335829,
+        theme: "আদায় ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.480071, 88.335829",
+        video1: "https://www.youtube.com/watch?v=mo0Bnp90xR4"
+      },
+      {
+        name:"বড়িশা সর্বজনীন",
+        engname: "Barisha Sarbojanin",
+        lat: 22.479801, lon:  88.307860,
+        theme: "রুদ্রাণী ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.479801, 88.307860",
+        video1: "https://www.facebook.com/watch/?v=1712567859579488&ref=sharing"
+      },
+      {
+        name:"নাকতলা উদয়ন সংঘ",
+        engname: "Naktala Udayan Sangha",
+        lat: 22.474282, lon:  88.366680,
+        theme: "একান্নবর্তী",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.474282, 88.366680",
+        video1: "https://www.youtube.com/watch?v=-LwWjRCfi0A"
+      },
+      {
+        name:"কেন্দুয়া শান্তি সংঘ",
+        engname: "Kendua Shanti Sangha",
+        lat: 22.472050, lon:  88.381606,
+        theme: "অনুনাদ",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.472050, 88.381606",
+        video1: "https://www.facebook.com/watch/?v=1688764675024981&ref=sharing",
+        video2: "https://www.youtube.com/watch?v=E1-ezuPC8Ys"},
+      {
+        name:"ঠাকুরপুকুর স্টেট ব্যাঙ্ক পার্ক সর্বজনীন",
+        engname: "Thakurpukur State Bank Park Sarbojanin",
+        lat: 22.467879, lon:  88.308979,
+        theme: "আমাদের দুগ্গা মা",
+        gmap: "https://www.google.com/maps/dir/?api=1&destination=22.467879, 88.308979",
+        video1: "https://www.youtube.com/watch?v=DvV3rlJnGGI",
+        video2: "https://www.youtube.com/watch?v=JagCqzYrqAE"},
+
+    ];
+
+    var markers = [];
+    var placesList = document.getElementById("placesList");
+
+    locations.forEach(function(loc, i) {
+      var color = "#c9184a"//i % 2 === 0 ? "#c9184a" : "#0077b6"; // alternate colors
+      var marker = L.marker([loc.lat, loc.lon], {icon: coloredIcon(color)}).addTo(map)
+        .bindPopup(
+          `<div>
+            <strong>${loc.name}</strong><br/>
+            ${loc.theme ? "<em>Theme: " + loc.theme + "</em><br/>" : ""}
+            <a href="${loc.gmap}" target="_blank">📍 Directions </a>
+            ${loc.video1 ? `<a href="${loc.video1}" target="_blank">▶ Video 1</a>` : ""}
+            ${loc.video2 ? `<a href="${loc.video2}" target="_blank">▶ Video 2</a>` : ""}
+          </div>`
+        );
+      markers.push({ marker: marker, data: loc });
+		const isMobile = window.innerWidth < 768;
+		const defaultZoom = isMobile ? 16 : 15;
+      var placeDiv = document.createElement("div");
+      placeDiv.className = "place";
+      placeDiv.innerHTML = `<strong>${loc.name}</strong>${loc.theme ? "<small>ভাবনা : "+loc.theme+"</small>" : ""}`;
+      placeDiv.onclick = function() {
+        map.setView([loc.lat, loc.lon], defaultZoom);
+		//map.panBy([-150, -150]);
+        marker.openPopup();
+      };
+      placesList.appendChild(placeDiv);
+    });
+
+    // Search filter
+    document.getElementById("searchBox").addEventListener("input", function(e) {
+      var query = e.target.value.toLowerCase();
+      placesList.innerHTML = "";
+	  const isMobile = window.innerWidth < 768;
+	  const defaultZoom = isMobile ? 16 : 15;
+      markers.forEach(function(item) {
+        if(item.data.name.toLowerCase().includes(query) || item.data.engname.toLowerCase().includes(query)) {
+          var placeDiv = document.createElement("div");
+          placeDiv.className = "place";
+          placeDiv.innerHTML = `<strong>${item.data.name}</strong>${item.data.theme ? "<small>ভাবনা : "+item.data.theme+"</small>" : ""}`;
+          placeDiv.onclick = function() {
+            map.setView([item.data.lat, item.data.lon], defaultZoom);
+			//map.panBy([-150, -150]);
+            item.marker.openPopup();
+          };
+          placesList.appendChild(placeDiv);
+        }
+      });
+    });
+
+    // Toggle sidebar for mobile
+    var sidebar = document.getElementById("sidebar");
+	var mapDiv = document.getElementById("map");
+    document.getElementById("toggleBtn").addEventListener("click", function() {
+      sidebar.classList.toggle("open");
+	  
+	  if (sidebar.classList.contains("open")) {
+		mapDiv.style.height = "50%";   // Shrink when menu open
+	  } else {
+		mapDiv.style.height = "100%";  // Full when menu closed
+	  }
+
+	  setTimeout(() => {
+		map.invalidateSize(); // force Leaflet to redraw map
+	  }, 300);
+    });
+	
+  </script>
+</body>
+</html>
