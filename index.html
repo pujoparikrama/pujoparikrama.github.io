@@ -298,7 +298,7 @@
    lat: 22.604383, lon:  88.403928,
    theme: "তবু মনে রেখো - পর্ব ২",
    gmap: "https://www.google.com/maps/dir/?api=1&destination=22.604383, 88.403928",
-   video2: "https://www.facebook.com/61553946580440/videos/1350325853364473"},
+   video1: "https://www.facebook.com/61553946580440/videos/1350325853364473"},
  {
    name:"মাষ্টারদা স্মৃতি সংঘ",
    engname: "Master Da Smriti Sangha Club",
@@ -1265,6 +1265,7 @@
 
     locations.forEach(function(loc, i) {
       var color = loc.video1 ? "#c9184a" : "#868686"; //"#c9184a"//i % 2 === 0 ? "#c9184a" : "#0077b6"; // alternate colors
+	  
       var marker = L.marker([loc.lat, loc.lon], {icon: coloredIcon(color)}).addTo(map)
         .bindPopup(
           `<div>
@@ -1329,6 +1330,4 @@
 	
   </script>
 </body>
-
 </html>
-
